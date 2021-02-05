@@ -54,7 +54,7 @@ const Utils = {
         return signal + value
     },
     formatAmount(value){
-        return Number(value) * 100
+        return Math.round(value*100)
     },
     formatDate(date){
         const splittedDate = date.split("-")
@@ -130,7 +130,7 @@ const Form = {
     clearFields(){
         Form.description.value = ""
         Form.amount.value = ""
-        Form.date.value = ""
+        Form.date.value = new Date().toJSON().slice(0,10)
     },
     submit(event){
         event.preventDefault()
@@ -151,9 +151,8 @@ const Form = {
 const App = {
     init(){
         Transaction.all.forEach(DOM.addTransaction)
-        
         DOM.updateBalance()
-
+        document.querySelector("input#date").value = new Date().toJSON().slice(0,10)
         Storage.set(Transaction.all)
     },
     reload(){
@@ -162,5 +161,9 @@ const App = {
     }
 
 }
-
 App.init()
+document.addEventListener('keydown', e => {
+    e.key == 'Escape' && document.querySelector('.modal-overlay').classList.remove('active')
+    e.key == 'Enter' && document.querySelector('.modal-overlay').classList.add('active')
+
+});
