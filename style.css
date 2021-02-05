@@ -172,7 +172,7 @@ table thead th{
 
     font-weight: normal;
     padding: 1rem 2rem;
-
+    cursor: pointer;
     text-align: left;
 }
 
