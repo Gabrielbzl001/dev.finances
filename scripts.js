@@ -165,5 +165,4 @@ App.init()
 document.addEventListener('keydown', e => {
     e.key == 'Escape' && document.querySelector('.modal-overlay').classList.remove('active')
     e.key == 'Enter' && document.querySelector('.modal-overlay').classList.add('active')
-
 });
