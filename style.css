@@ -244,6 +244,11 @@ input{
     padding: 0.8rem;
     width: 100%;
 }
+small{
+    opacity: 0.4;
+    margin-left: 1rem;
+    font-size: 0.7rem;
+}
 
 .input-group small{
     opacity: 0.4;
@@ -272,9 +277,16 @@ footer{
     opacity: 0.6;
 }
 
+small{
+    display: none;
+}
+
 @media (min-width:800px){
     html{
         font-size: 87.5%;
+    }
+    small{
+        display: inline;
     }
 
     #balance{
