@@ -1,6 +1,7 @@
 const Modal = {
     toggle(){
         document.querySelector('.modal-overlay').classList.toggle('active')
+        document.querySelector('.modal-overlay').classList.contains('active') && document.querySelector('input#description').focus()
     }
 }
 const Storage ={
@@ -163,6 +164,71 @@ const App = {
 }
 App.init()
 document.addEventListener('keydown', e => {
-    e.key == 'Escape' && document.querySelector('.modal-overlay').classList.remove('active')
-    e.key == 'Enter' && document.querySelector('.modal-overlay').classList.add('active')
+    const modal = document.querySelector('.modal-overlay').classList
+    e.key == 'Escape' && modal.toggle('active') && document.querySelector('input#description').focus()
 });
+document.querySelectorAll('th').forEach(th => th.addEventListener('click', th => {
+    switch (th.target.innerHTML) {
+        case "Descrição":
+            th.target.classList.toggle('asc')
+            if(th.target.classList.contains('asc')){
+                Transaction.all = Transaction.all.sort((a, b) => {
+                    if(a.description < b.description){
+                        return -1
+                    }
+                    return 1
+                })
+            }else{
+                Transaction.all = Transaction.all.sort((a, b) => {
+                    if(a.description > b.description){
+                        return -1
+                    }
+                    return 1
+                })
+            }
+            
+            App.reload()
+            break;
+        case "Valor":
+            th.target.classList.toggle('asc')
+            if(th.target.classList.contains('asc')){
+                Transaction.all = Transaction.all.sort((a, b) => {
+                    if(a.amount < b.amount){
+                        return -1
+                    }
+                    return 1
+                })
+            }else{
+                Transaction.all = Transaction.all.sort((a, b) => {
+                    if(a.amount > b.amount){
+                        return -1
+                    }
+                    return 1
+                })
+            }
+            App.reload()
+            break;
+            case "Data":
+                th.target.classList.toggle('asc')
+            if(th.target.classList.contains('asc')){
+                Transaction.all = Transaction.all.sort((a, b) => {
+                    if(a.date < b.date){
+                        return -1
+                    }
+                    return 1
+                })
+            }else{
+                Transaction.all = Transaction.all.sort((a, b) => {
+                    if(a.date > b.date){
+                        return -1
+                    }
+                    return 1
+                })
+            }
+                App.reload()
+                break;
+        default:
+            App.reload()
+    }
+}
+))
